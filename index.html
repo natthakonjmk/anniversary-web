@@ -45,7 +45,8 @@ body{
 .passInputs input{
   width:56px;height:56px;font-size:2rem;text-align:center;
   border-radius:16px;border:1px solid #f5c66a;background:#fffbe8;
-  color:transparent;text-shadow:0 0 0 #d8a536;caret-color:transparent
+  color:#d8a536;
+  caret-color:#d8a536;
 }
 
 section{padding:80px 24px;max-width:900px;margin:auto;position:relative;z-index:2}
@@ -406,9 +407,11 @@ function checkPass(){
   if(v===correctPass){
     lockScreen.style.display="none";
     bgMusic.play();playing=true;musicBtn.textContent="🔊";
+    unlockHearts(); // 💖 เอฟเฟกต์หัวใจ
+  } else {
+    alert("รหัสผิดนะตัวจิ๋วลองใหม่อีกทีคับผ้มม 💕");
   }
 }
-
 const coupons=document.querySelectorAll(".coupon");
 const usedCountEl=document.getElementById("usedCount");
 
@@ -484,7 +487,7 @@ style.innerHTML=`@keyframes flyUp{from{transform:translateY(0);opacity:1}to{tran
 document.head.appendChild(style);
 
 // 💖 นับวันคบกัน
-const startDate = new Date("2025-10-20");
+const startDate = new Date("2025-12-3");
 const today = new Date();
 const diffTime = today - startDate;
 const diffDays = Math.floor(diffTime / (1000*60*60*24));
