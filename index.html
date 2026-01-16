@@ -132,43 +132,48 @@ box-shadow:0 20px 40px rgba(0,0,0,.15);cursor:pointer;overflow:hidden}
 
 .coupon .btn{
   display:inline-block;
-  margin-top:14px;           /* เว้นจากวันหมดอายุ */
+  margin-top:14px;
   padding:8px 18px;
-  border:2px solid #d8a536;  /* ขอบเหลืองเข้ม */
+  border:2px solid #d8a536;
   border-radius:6px;
-  background:#ffd24d;       /* พื้นหลังเหลือง */
+  background:#ffd24d;
   color:#6b4f00;
   font-weight:bold;
   cursor:pointer;
   box-shadow:0 4px 10px rgba(0,0,0,.15);
   transition:.2s;
-
-  /* Animation */
   animation:
     pulse 1.6s ease-in-out infinite,
     glow 2s ease-in-out infinite,
     floatBtn 2.2s ease-in-out infinite;
 }
+.coupon .btn:hover{transform:scale(1.1)}
 
-.coupon .btn:hover{
-  transform:scale(1.1);
-}
-
-/* ระยะห่างบรรทัดวันหมดอายุ */
-.coupon .expire{
-  display:block;
-  margin-top:6px;
-  font-size:0.8rem;
-  color:#999;
-}
-  
 #couponSummary{margin:20px auto;max-width:340px;background:#fffbe8;border-radius:20px;padding:14px;border:1px solid #f5c66a}
 
 footer{text-align:center;color:#aaa;padding-bottom:60px;z-index:2;position:relative}
+
+/* === Loader เพิ่มเข้าไป === */
+#loader{
+  position:fixed;inset:0;
+  background:linear-gradient(135deg,#fffbe8,#ffe58f);
+  display:flex;justify-content:center;align-items:center;
+  z-index:10000;
+}
+.loader-box{text-align:center}
+.heartLoader{font-size:64px;animation:beat 1.2s infinite}
+@keyframes beat{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
 </style>
 </head>
 
 <body>
+
+<div id="loader">
+  <div class="loader-box">
+    <div class="heartLoader">💗</div>
+    <p>กำลังเปิดหัวใจให้คนพิเศษ…</p>
+  </div>
+</div>
 
 <div id="glitter"></div>
 
@@ -401,7 +406,32 @@ function createStar(){
   setTimeout(()=>s.remove(),20000);
 }
 setInterval(createStar,500);
+
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    const loader=document.getElementById("loader");
+    if(loader) loader.style.display="none";
+  },1500);
+});
+
+// เอฟเฟกต์หัวใจตอนปลดล็อค
+function unlockHearts(){
+  for(let i=0;i<30;i++){
+    const h=document.createElement("div");
+    h.textContent="💖";
+    h.style.position="fixed";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top="100vh";
+    h.style.fontSize="24px";
+    h.style.animation="flyUp 3s linear forwards";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+  }
+}
+const style=document.createElement("style");
+style.innerHTML=`@keyframes flyUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-120vh);opacity:0}}`;
+document.head.appendChild(style);
 </script>
 
 </body>
-</html> 
+</html>
