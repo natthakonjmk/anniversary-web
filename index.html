@@ -272,24 +272,50 @@ footer{text-align:center;color:#b08b1c;padding-bottom:60px}
   </iframe>
 </section>
 
-<footer>Always us 💛</footer>
+<section class="coupons">
+<h2>🎟 Love Coupons</h2>
+<div class="coupon"><h3>🤍 คูปองโอ๋</h3><p>โอ๋ได้ทันที</p><span class="btn">ใช้คูปอง</span></div>
+<div class="coupon"><h3>🍜 คูปองเลี้ยงข้าว</h3><p>มื้อไหนก็ได้</p><span class="btn">ใช้คูปอง</span></div>
+<div class="coupon"><h3>🎬 คูปองดูหนัง</h3><p>ตามใจเธอ</p><span class="btn">ใช้คูปอง</span></div>
+<div class="coupon"><h3>🫂 คูปองกอด</h3><p>กอดยาว 5 นาที</p><span class="btn">ใช้คูปอง</span></div>
+<div class="coupon"><h3>😴 คูปองง้อ</h3><p>ใช้ตอนงอน</p><span class="btn">ใช้คูปอง</span></div>
+<div class="coupon"><h3>✈️ คูปองทริปเล็ก ๆ</h3><p>ไปด้วยกัน</p><span class="btn">ใช้คูปอง</span></div>
+</section>
+
+<footer>Always us 🤍</footer>
 
 <script>
 const correctPass="0312";
 const inputs=document.querySelectorAll(".passInputs input");
 inputs.forEach((input,i)=>{
   input.addEventListener("input",()=>{if(input.value&&i<3)inputs[i+1].focus();});
+  input.addEventListener("keydown",e=>{
+    if(e.key==="Backspace"&&!input.value&&i>0)inputs[i-1].focus();
+    if(e.key==="Enter")checkPass();
+  });
 });
 function checkPass(){
   let val="";inputs.forEach(i=>val+=i.value);
   if(val===correctPass){
     document.getElementById("successSound").play();
+    showHearts();
     setTimeout(()=>lockScreen.style.display="none",600);
   }else{
+    lockBox.classList.add("shake");
+    setTimeout(()=>lockBox.classList.remove("shake"),400);
     inputs.forEach(i=>i.value="");inputs[0].focus();
   }
 }
-
+function showHearts(){
+  for(let i=0;i<8;i++){
+    const s=document.createElement("span");
+    s.innerText="💖";
+    s.style.left=Math.random()*220+"px";
+    s.style.top="150px";
+    hearts.appendChild(s);
+    setTimeout(()=>s.remove(),1200);
+  }
+}
 const cards=document.querySelectorAll(".video-card");
 const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add("show")),{threshold:.3});
 cards.forEach(c=>obs.observe(c));
