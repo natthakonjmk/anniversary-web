@@ -386,7 +386,6 @@ width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encry
 <footer>Always us 🤍</footer>
 
 <script>
-<script>
 const lockScreen = document.getElementById("lockScreen");  
 const bgMusic=document.getElementById("bgMusic");
 const musicBtn=document.getElementById("musicBtn");
@@ -442,7 +441,8 @@ coupons.forEach(c=>{
   }
 });
 
-document.getElementById("envelope").onclick=()=>envelope.classList.toggle("open");
+const envelope = document.getElementById("envelope");
+envelope.onclick = () => envelope.classList.toggle("open");
 
 const glitter=document.getElementById("glitter");
 function createStar(){
