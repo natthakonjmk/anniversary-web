@@ -433,14 +433,20 @@ width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encry
 <footer>Always us 🤍</footer>
 
 <script>
-const lockScreen = document.getElementById("lockScreen");  
-const bgMusic=document.getElementById("bgMusic");
-const musicBtn=document.getElementById("musicBtn");
-let playing=false;
-musicBtn.onclick=()=>{
-  if(!playing){bgMusic.play();musicBtn.textContent="🔊";}
-  else{bgMusic.pause();musicBtn.textContent="🔇";}
-  playing=!playing;
+const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+let playing = false; // เริ่มต้น = ยังไม่เล่น
+
+musicBtn.onclick = () => {
+  if (!playing) {
+    bgMusic.play();
+    musicBtn.textContent = "🔊";
+  } else {
+    bgMusic.pause();
+    musicBtn.textContent = "🔇";
+  }
+  playing = !playing;
 };
 
 const correctPass="0312";
