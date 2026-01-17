@@ -471,14 +471,13 @@ function checkPass(){
 const coupons = document.querySelectorAll(".coupon");
 const usedCountEl = document.getElementById("usedCount");
 
-// โหลดสถานะจาก localStorage
+// โหลดจาก localStorage
 let usedCoupons = JSON.parse(localStorage.getItem("usedCoupons") || "[]");
 
 function updateSummary(){
   usedCountEl.textContent = usedCoupons.length;
 }
 
-// ❤️ สร้างหัวใจตอนใช้คูปอง
 function createHearts(el){
   for(let i=0;i<8;i++){
     const heart=document.createElement("div");
@@ -492,23 +491,36 @@ function createHearts(el){
   }
 }
 
-// โหลดตอนเปิดหน้า
+// ผูกปุ่มเฉพาะ .btn
 coupons.forEach(c=>{
   const id = c.dataset.id;
+  const btn = c.querySelector(".btn");
+
+  // โหลดสถานะ
   if(usedCoupons.includes(id)){
     c.classList.add("used");
+    btn.textContent = "ใช้แล้ว";
+    btn.style.pointerEvents = "none";
+    btn.style.opacity = "0.6";
   }
 
-  c.onclick = ()=>{
+  btn.onclick = (e)=>{
+    e.stopPropagation();
     if(!c.classList.contains("used")){
       c.classList.add("used");
+      btn.textContent = "ใช้แล้ว";
+      btn.style.pointerEvents = "none";
+      btn.style.opacity = "0.6";
+
       usedCoupons.push(id);
       localStorage.setItem("usedCoupons", JSON.stringify(usedCoupons));
+
       createHearts(c);
       updateSummary();
     }
-  }
+  };
 });
+
 updateSummary();
   
 const envelope = document.getElementById("envelope");
