@@ -455,10 +455,14 @@ inputs.forEach((inp,i)=>{
   inp.addEventListener("input",()=>{if(inp.value&&i<3)inputs[i+1].focus()});
 });
 function checkPass(){
-  let v="";inputs.forEach(i=>v+=i.value);
-  if(v===correctPass){
-    lockScreen.style.display="none";
-    bgMusic.play();playing=true;musicBtn.textContent="🔊";
+  let v = "";
+  inputs.forEach(i => v += i.value);
+
+  if(v === correctPass){
+    lockScreen.style.display = "none";
+    bgMusic.play();        // ▶️ เล่นเพลง
+    playing = true;
+    musicBtn.textContent = "🔊";
     unlockHearts(); // 💖 เอฟเฟกต์หัวใจ
   } else {
     alert("รหัสผิดนะตัวจิ๋วลองใหม่อีกทีคับผ้มม 💕");
